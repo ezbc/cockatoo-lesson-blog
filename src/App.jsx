@@ -1,12 +1,12 @@
-import Blog from "./Blog.jsx";
+import BlogTitles from "./BlogTitles.jsx";
 
 function App() {
 
   return (
     <div className="App">
         <h1>Cockatoo Lesson Blog</h1>
-        <Blog>
-        </Blog>
+        <BlogTitles>
+        </BlogTitles>
     </div>
   )
 }
