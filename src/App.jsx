@@ -13,7 +13,7 @@ function App() {
             <AddBlogTitle setNewTitle={setNewTitle}/>
             <Search onSearch={setSearchText}/>
             <BlogTitles newTitle={newTitle} searchText={searchText}/>
-            {/*<Lessons/>*/}
+            <Lessons/>
         </div>
     );
 }
