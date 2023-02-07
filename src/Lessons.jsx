@@ -1,16 +1,9 @@
 const LESSONS = {
-    '1.1': {
+    '1.4': {
         'learningObjectives': [
-            "Getting started creating a React app",
-            "Understanding React components",
-            "Using JSX in React",
-            "Working with lists in React",
-        ]
-    },
-    '1.2': {
-        'learningObjectives': [
-            "Familiarize yourself with React DOM",
-            "Build simple React Components"
+            "Lifting State",
+            "Controlled Components",
+            "Props handling",
         ]
     },
     '1.3': {
@@ -21,13 +14,20 @@ const LESSONS = {
             "Understand how callback handlers are used to share data up the component tree",
         ]
     },
-    '1.4': {
+    '1.2': {
         'learningObjectives': [
-            "Lifting State",
-            "Controlled Components",
-            "Props handling",
+            "Familiarize yourself with React DOM",
+            "Build simple React Components"
         ]
-    }
+    },
+    '1.1': {
+        'learningObjectives': [
+            "Getting started creating a React app",
+            "Understanding React components",
+            "Using JSX in React",
+            "Working with lists in React",
+        ]
+    },
 }
 
 export default function Lessons({lessons}) {
