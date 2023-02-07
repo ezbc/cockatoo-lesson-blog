@@ -1,21 +1,18 @@
 import React from 'react';
 
-export default function Search(props) {
+export default function Search({onSearch}) {
 
-    function onSearch(event) {
-        event.preventDefault()
-        const searchInput = event.target.elements['search'].value
-
-        props.onSearch(searchInput); // on search is the callback
-
+    function onChange(event) {
+        // when this callback was handling the form onSubmit, we got a form submit event
+        // no this callback is handling the input onChange, we get a input change event
+        const searchInput = event.target.value
+        onSearch(searchInput); // on search is the callback
     }
 
     return (
-        <form onSubmit={onSearch}>
+        <form>
             <label>Search Text</label>
-            <input id='search' type='text'></input>
-
-            <button type="submit">Search</button>
+            <input onChange={onChange} id='search' type='text'></input>
         </form>
     )
 };
