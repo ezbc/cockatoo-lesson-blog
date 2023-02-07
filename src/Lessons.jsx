@@ -21,6 +21,13 @@ const LESSONS = {
             "Understand how callback handlers are used to share data up the component tree",
         ]
     },
+    '1.4': {
+        'learningObjectives': [
+            "Lifting State",
+            "Controlled Components",
+            "Props handling",
+        ]
+    }
 }
 
 export default function Lessons({lessons}) {
@@ -29,18 +36,18 @@ export default function Lessons({lessons}) {
             <br/>
             <br/>
             {
-            Object.entries(LESSONS).map(
-                ([lesson, details]) => {
-                    return (
-                        <>
-                            <h2 key={lesson}>Lesson {lesson}</h2>
-                            <ul>{details.learningObjectives.map((learningObjective) =>
-                                <li>{learningObjective}</li>)}</ul>
-                        </>
-                    )
-                }
-            )
-        }
+                Object.entries(LESSONS).map(
+                    ([lesson, details]) => {
+                        return (
+                            <>
+                                <h2 key={lesson}>Lesson {lesson}</h2>
+                                <ul>{details.learningObjectives.map((learningObjective) =>
+                                    <li>{learningObjective}</li>)}</ul>
+                            </>
+                        )
+                    }
+                )
+            }
         </div>
     );
 }
