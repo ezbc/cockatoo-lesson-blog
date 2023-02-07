@@ -11,7 +11,7 @@ export default function Search({onSearch}) {
         setTimer(
             setTimeout(() => {
                 const searchInput = event.target.value
-                onSearch(searchInput); // on search is the callback
+                onSearch(searchInput);
             }, 500)
         );
     }
