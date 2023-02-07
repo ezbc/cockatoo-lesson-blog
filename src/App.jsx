@@ -11,9 +11,9 @@ function App() {
         <div className="App">
             <h1>Cockatoo Lesson Blog Title</h1>
             <AddBlogTitle setNewTitle={setNewTitle}/>
-            <Search onSearch={setSearchText}/>
+            <Search onSearch={setSearchText} searchText={searchText}/>
             <BlogTitles newTitle={newTitle} searchText={searchText}/>
-            {/*<Lessons/>*/}
+            <Lessons/>
         </div>
     );
 }
