@@ -1,14 +1,10 @@
-export default function BlogTitles({newTitle, searchText}) {
-    const blogs = ["Lesson 1.1 Project setup",
-        "Lesson 1.2 React DOM and components",
-        "Lesson 1.3 Form input, props, state and callbacks",
-        newTitle || '']
+export default function BlogTitles({titles, searchText}) {
 
     function matchesSearch(blogTitle) {
         return blogTitle.toLowerCase().includes(searchText.toLowerCase())
     }
 
-    const blogsMatchingSearch = blogs.filter(matchesSearch)
+    const blogsMatchingSearch = titles.filter(matchesSearch)
 
     return (
         <ul>
