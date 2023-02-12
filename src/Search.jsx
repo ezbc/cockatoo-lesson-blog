@@ -1,24 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-export default function Search(props) {
+export default function Search({onSearch}) {
+    const [timer, setTimer] = useState(null);
 
-    function onSearch(event) {
-        event.preventDefault()
-        const searchInput = event.target.elements['search'].value
-
-        props.onSearch(searchInput); // on search is the callback
-
+    function onChange(event) {
+        if (timer) {
+            clearTimeout(timer);
+            setTimer(null);
+        }
+        setTimer(
+            setTimeout(() => {
+                const searchInput = event.target.value
+                onSearch(searchInput);
+            }, 500)
+        );
     }
 
-    return (
-        <form onSubmit={onSearch}>
-            <label>Search Text</label>
-            <input id='search' type='text'></input>
-
-            <button type="submit">Search</button>
-        </form>
-    )
-};
+return (
+    <form>
+        <label>Search Text</label>
+        <input onChange={onChange} id='search' type='text'></input>
+    </form>
+)};
 
 
 

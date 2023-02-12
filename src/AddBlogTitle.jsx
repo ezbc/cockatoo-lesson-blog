@@ -1,9 +1,9 @@
-export default function AddBlogTitle(props) {
+export default function AddBlogTitle({setNewTitle}) {
 
     function onSubmit(event) {
         event.preventDefault()
         const newBlogTitle = event.target[0].value
-        props.setNewTitle(newBlogTitle)
+        setNewTitle(newBlogTitle)
     }
 
     return (
