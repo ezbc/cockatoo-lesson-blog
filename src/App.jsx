@@ -17,6 +17,9 @@ function App() {
     const [ blogTitles, setBlogTitles]= useSemiPersistentState('savedBlogTitles', initialBlogs)
     const [searchText, setSearchText] = react.useState('');
 
+    // Create InputWithLabel component and refactor search and add blog title
+    // Focus on add blog after creating one, focus on search by default
+    // add remove button
 
     return (
         <div>
