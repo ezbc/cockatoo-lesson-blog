@@ -1,5 +1,5 @@
 import BlogTitles from './BlogTitles.jsx';
-import react from 'react';
+import react, {useEffect} from 'react';
 import AddBlogTitle from './AddBlogTitle.jsx'
 import Search from './Search.jsx'
 import useSemiPersistentState from "./useSemiPersistentState.jsx";
@@ -14,17 +14,24 @@ function App() {
         "Lesson 1.5 Side effects, custom hooks, fragments",
     ]
     const initialBlogs = initialTitles.map(title => titleToBlog(title))
-    const [ blogTitles, setBlogTitles]= useSemiPersistentState('savedBlogTitles', initialBlogs)
+    const [blogTitles, setBlogTitles] = useSemiPersistentState('savedBlogTitles', initialBlogs)
     const [searchText, setSearchText] = react.useState('');
+    const [focus, setFocus] = react.useState('search');
 
+    // focus needs to be reset after the latest focus is applied
+    useEffect(() => {
+        !!focus && setFocus()
+    }, [focus])
 
+    const onAddBlogTitle = (newTitle) => {
+        setBlogTitles([...blogTitles, titleToBlog(newTitle)])
+        setFocus('addBlog')
+    }
     return (
         <div>
             <h1>Cockatoo Lesson Blog Title</h1>
-            <AddBlogTitle onAddTitle={(newTitle) => {
-                setBlogTitles([...blogTitles, titleToBlog(newTitle)]) // react does state update in background, asynchronously
-            }}/>
-            <Search onSearch={setSearchText}/>
+            <AddBlogTitle focus={focus === 'addBlog'} onAddTitle={onAddBlogTitle}/>
+            <Search onSearch={setSearchText} focus={focus === 'search'}/>
             <BlogTitles titles={blogTitles} searchText={searchText}/>
         </div>
     );

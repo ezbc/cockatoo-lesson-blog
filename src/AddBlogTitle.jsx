@@ -1,4 +1,6 @@
-export default function AddBlogTitle({onAddTitle}) {
+import InputAndLabel from "./InputAndLabel";
+
+export default function AddBlogTitle({onAddTitle, focus}) {
 
     function onSubmit(event) {
         event.preventDefault()
@@ -8,8 +10,8 @@ export default function AddBlogTitle({onAddTitle}) {
 
     return (
         <form onSubmit={onSubmit}>
-            <label htmlFor={'blog-title'}>Add blog title</label>
-            <input type='text' id={'blog-title'} name={'blog-title'}></input>
+            <InputAndLabel focus={focus} title={'addBlog'} placeholder={'Add blog'} id={'addBlog'} name={'addBlog'}>Add
+                Blog</InputAndLabel>
             <button type={'submit'}>Submit</button>
         </form>
 
