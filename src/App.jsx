@@ -12,6 +12,8 @@ function App() {
         "Lesson 1.3 Form input, props, state and callbacks",
         "Lesson 1.4 Lifting state, controlled components, props handling",
         "Lesson 1.5 Side effects, custom hooks, fragments",
+        "Lesson 1.6 Reusable Components, Imperative React",
+        "Lesson 1.7 Asynchronous Data, Conditional Rendering, Advanced and Impossible State"
     ]
     const initialBlogs = initialTitles.map(title => titleToBlog(title))
     const [blogTitles, setBlogTitles] = useSemiPersistentState('savedBlogTitles', initialBlogs)
