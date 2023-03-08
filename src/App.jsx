@@ -1,5 +1,5 @@
 import BlogTitles from './BlogTitles.jsx';
-import { useState, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import AddBlogTitle from './AddBlogTitle.jsx';
 import Search from './Search.jsx';
 import { getItem, setItem } from './useSemiPersistentState.jsx';
