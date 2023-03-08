@@ -18,13 +18,28 @@ function App() {
         "Lesson 1.7 Asynchronous Data, Conditional Rendering"
     ]
     const initialBlogs = initialTitles.map(title => titleToBlog(title))
-    const [blogTitles, setBlogTitles] = useState(getItem(LOCALSTORAGE_KEY) || initialBlogs)
-    const [searchText, setSearchText] = useState('');
-    const [focus, setFocus] = useState('search');
+    const [blogTitles, setBlogTitles] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        setItem(LOCALSTORAGE_KEY, blogTitles)
+        new Promise(
+            (resolve, reject) => {
+                setTimeout(() => {
+                    resolve(getItem(LOCALSTORAGE_KEY) || initialBlogs)
+                }, 2000)
+            }
+        ).then((blogTitlesFromLocalStorage) => {
+            setBlogTitles(blogTitlesFromLocalStorage)
+            setIsLoading(false)
+        })
+    }, [])
+
+    useEffect(() => {
+        !isLoading && setItem(LOCALSTORAGE_KEY, blogTitles)
     }, [blogTitles])
+
+    const [searchText, setSearchText] = useState('');
+    const [focus, setFocus] = useState('search');
 
     // focus needs to be reset after the latest focus is applied
     useEffect(() => {
@@ -40,7 +55,9 @@ function App() {
             <h1>Cockatoo Lesson Blog Title</h1>
             <AddBlogTitle focus={focus === 'addBlog'} onAddTitle={onAddBlogTitle}/>
             <Search onSearch={setSearchText} focus={focus === 'search'}/>
-            <BlogTitles titles={blogTitles} searchText={searchText}/>
+            {isLoading ? <p>Loading...</p> :
+                (<BlogTitles titles={blogTitles} searchText={searchText}/>)}
+
         </div>
     );
 }
