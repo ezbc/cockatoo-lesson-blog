@@ -3,8 +3,7 @@ import { useEffect, useReducer } from 'react';
 import AddBlogTitle from './AddBlogTitle.jsx';
 import Search from './Search.jsx';
 import { getItem, setItem } from './useSemiPersistentState.jsx';
-
-const titleToBlog = title => ({ id: crypto.randomUUID(), title });
+import { create, listRecords } from './airtableApi.jsx';
 
 const initialTitles = [
   'Lesson 1.1 Project setup',
@@ -45,10 +44,7 @@ const stateManagementFunction = (previousState, action) => {
       return {
         ...previousState,
         isAdding: false,
-        blogTitles: [
-          ...previousState.blogTitles,
-          titleToBlog(action.payload.newTitle),
-        ],
+        blogTitles: [...previousState.blogTitles, ...action.payload.newBlogs],
         focus: 'addBlog',
       };
     case 'RESET_FOCUS':
@@ -71,39 +67,31 @@ const initialState = {
 };
 
 function App() {
-  const initialBlogs = initialTitles.map(title => titleToBlog(title));
   const [state, runAction] = useReducer(stateManagementFunction, initialState);
 
   useEffect(() => {
-    setTimeout(() => {
-      const blogTitlesFromLocalStorage =
-        getItem(LOCALSTORAGE_KEY) || initialBlogs;
+    listRecords().then(loadedTitles => {
       runAction({
         type: 'FINISH_LOADING_BLOG_TITLES',
-        payload: { blogTitles: blogTitlesFromLocalStorage },
+        payload: { blogTitles: loadedTitles },
       });
-    }, 2000);
+    });
   }, []);
-
-  useEffect(() => {
-    !state.isLoading && setItem(LOCALSTORAGE_KEY, state.blogTitles);
-  }, [state.blogTitles]);
 
   // focus needs to be reset after the latest focus is applied
   useEffect(() => {
     !!state.focus && runAction({ type: 'RESET_FOCUS' });
   }, [state.focus]);
 
-  const onAddBlogTitle = newTitle => {
+  const onAddBlogTitle = async newTitle => {
     runAction({
       type: 'START_ADDING_BLOG_TITLE',
     });
-    setTimeout(() => {
-      runAction({
-        type: 'FINISH_ADDING_BLOG_TITLE',
-        payload: { newTitle: newTitle },
-      });
-    }, 2000);
+    const newBlogs = await create({ title: newTitle });
+    runAction({
+      type: 'FINISH_ADDING_BLOG_TITLE',
+      payload: { newBlogs: newBlogs },
+    });
   };
 
   const onSearch = searchText =>
