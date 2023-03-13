@@ -78,6 +78,17 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    if (state.searchText) {
+      listRecords({ searchText: state.searchText }).then(loadedTitles => {
+        runAction({
+          type: 'FINISH_LOADING_BLOG_TITLES',
+          payload: { blogTitles: loadedTitles },
+        });
+      });
+    }
+  }, [state.searchText]);
+
   // focus needs to be reset after the latest focus is applied
   useEffect(() => {
     !!state.focus && runAction({ type: 'RESET_FOCUS' });

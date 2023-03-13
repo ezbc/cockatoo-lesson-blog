@@ -9,9 +9,16 @@ const tableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TAB
 const defaultHeaders = {
   Authorization: `Bearer ${AIRTABLE_API_KEY}`,
 };
-export const listRecords = async () => {
+export const listRecords = async options => {
   try {
-    const response = await fetch(tableUrl, {
+    let params = {};
+    if (options?.searchText) {
+      params = {
+        ...params,
+        filterByFormula: `SEARCH('${options.searchText.toLowerCase()}', {title})`,
+      };
+    }
+    const response = await fetch(tableUrl + '?' + new URLSearchParams(params), {
       headers: { ...defaultHeaders },
       method: 'GET',
     });
