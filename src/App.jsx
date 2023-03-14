@@ -24,6 +24,11 @@ const filterBlogTitles = (blogTitles, searchText) =>
 
 const stateManagementFunction = (previousState, action) => {
   switch (action.type) {
+    case 'START_LOADING_BLOG_TITLES':
+      return {
+        ...previousState,
+        isLoading: true,
+      };
     case 'FINISH_LOADING_BLOG_TITLES':
       return {
         ...previousState,
@@ -70,23 +75,15 @@ function App() {
   const [state, runAction] = useReducer(stateManagementFunction, initialState);
 
   useEffect(() => {
-    listRecords().then(loadedTitles => {
+    runAction({
+      type: 'START_LOADING_BLOG_TITLES',
+    });
+    listRecords({ searchText: state.searchText }).then(loadedTitles => {
       runAction({
         type: 'FINISH_LOADING_BLOG_TITLES',
         payload: { blogTitles: loadedTitles },
       });
     });
-  }, []);
-
-  useEffect(() => {
-    if (state.searchText) {
-      listRecords({ searchText: state.searchText }).then(loadedTitles => {
-        runAction({
-          type: 'FINISH_LOADING_BLOG_TITLES',
-          payload: { blogTitles: loadedTitles },
-        });
-      });
-    }
   }, [state.searchText]);
 
   // focus needs to be reset after the latest focus is applied
