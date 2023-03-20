@@ -9,6 +9,7 @@ const tableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TAB
 const defaultHeaders = {
   Authorization: `Bearer ${AIRTABLE_API_KEY}`,
 };
+
 export const listRecords = async options => {
   try {
     let params = {};
@@ -24,7 +25,6 @@ export const listRecords = async options => {
     });
 
     if (!response.ok) {
-      console.log(response);
       throw 'Response not OK!';
     }
 
