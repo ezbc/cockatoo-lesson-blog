@@ -10,6 +10,23 @@ const defaultHeaders = {
   Authorization: `Bearer ${AIRTABLE_API_KEY}`,
 };
 
+const handleResponse = async response => {
+  if (!response.ok) {
+    throw 'Response not OK!';
+  }
+
+  const data = await response.json();
+
+  if (data.records) {
+    const records = data.records.map(record => ({
+      title: record.fields.title,
+      id: record.id,
+    }));
+
+    return records;
+  }
+};
+
 export const listRecords = async options => {
   try {
     let params = {};
@@ -19,23 +36,32 @@ export const listRecords = async options => {
         filterByFormula: `SEARCH('${options.searchText.toLowerCase()}', {title})`,
       };
     }
+    params = {
+      ...params,
+      'sort[0][field]': 'title',
+      'sort[0][direction]': 'desc',
+    };
     const response = await fetch(tableUrl + '?' + new URLSearchParams(params), {
       headers: { ...defaultHeaders },
       method: 'GET',
     });
 
-    if (!response.ok) {
-      throw 'Response not OK!';
-    }
+    return handleResponse(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-    const data = await response.json();
+export const deleteRecord = async recordToDelete => {
+  try {
+    const response = await fetch(`${tableUrl}/${recordToDelete.id}`, {
+      headers: {
+        ...defaultHeaders,
+      },
+      method: 'DELETE',
+    });
 
-    const records = data.records.map(record => ({
-      title: record.fields.title,
-      id: record.id,
-    }));
-
-    return records;
+    return handleResponse(response);
   } catch (error) {
     console.log(error);
   }
@@ -58,19 +84,7 @@ export const create = async newRecord => {
       method: 'POST',
     });
 
-    if (!response.ok) {
-      console.log(response);
-      throw 'Response not OK!';
-    }
-
-    const data = await response.json();
-
-    const newRecords = data.records.map(record => ({
-      title: record.fields.title,
-      id: record.id,
-    }));
-
-    return newRecords;
+    return handleResponse(response);
   } catch (error) {
     console.log(error);
   }

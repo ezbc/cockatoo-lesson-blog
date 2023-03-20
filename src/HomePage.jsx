@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { listRecords } from './airtableApi.jsx';
+import { deleteRecord, listRecords } from './airtableApi.jsx';
 import Search from './Search.jsx';
 import BlogTitles from './BlogTitles.jsx';
 
 const HomePage = ({ state, runAction }) => {
-  useEffect(() => {
+  const refreshRecords = () => {
     runAction({
       type: 'START_LOADING_BLOG_TITLES',
     });
@@ -14,10 +14,19 @@ const HomePage = ({ state, runAction }) => {
         payload: { blogTitles: loadedTitles },
       });
     });
+  };
+
+  useEffect(() => {
+    refreshRecords();
   }, [state.searchText]);
 
   const onSearch = searchText =>
     runAction({ type: 'SET_SEARCH_TEXT', payload: { searchText } });
+
+  const onRemove = async blog => {
+    await deleteRecord(blog);
+    refreshRecords();
+  };
 
   useEffect(() => {
     !!state.focus && runAction({ type: 'RESET_FOCUS' });
@@ -29,7 +38,7 @@ const HomePage = ({ state, runAction }) => {
       {state.isLoading ? (
         <p>Loading...</p>
       ) : (
-        <BlogTitles titles={state.blogTitles} />
+        <BlogTitles titles={state.blogTitles} onRemove={onRemove} />
       )}
       {state.isAdding && <p>Adding...</p>}
     </div>
