@@ -45,6 +45,7 @@ export const listRecords = async options => {
       'sort[0][field]': 'title',
       'sort[0][direction]': 'desc',
     };
+
     const response = await fetch(tableUrl + '?' + new URLSearchParams(params), {
       headers: { ...defaultHeaders },
       method: 'GET',

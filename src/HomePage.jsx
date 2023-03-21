@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { deleteRecord, listRecords } from './airtableApi.jsx';
 import Search from './Search.jsx';
 import BlogTitles from './BlogTitles.jsx';
+import paths from './paths.js';
 
 const HomePage = ({ state, runAction }) => {
   const refreshRecords = () => {
@@ -41,6 +42,7 @@ const HomePage = ({ state, runAction }) => {
         <BlogTitles titles={state.blogTitles} onRemove={onRemove} />
       )}
       {state.isAdding && <p>Adding...</p>}
+      <a href={paths.NEW_BLOG}>Add Blog</a>
     </div>
   );
 };
