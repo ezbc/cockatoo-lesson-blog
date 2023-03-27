@@ -30,17 +30,22 @@ const handleResponse = async response => {
 export const listRecords = async options => {
   try {
     let params = {};
+
+    // search with text
     if (options?.searchText) {
       params = {
         ...params,
         filterByFormula: `SEARCH('${options.searchText.toLowerCase()}', {title})`,
       };
     }
+
+    // sort by title
     params = {
       ...params,
       'sort[0][field]': 'title',
       'sort[0][direction]': 'desc',
     };
+
     const response = await fetch(tableUrl + '?' + new URLSearchParams(params), {
       headers: { ...defaultHeaders },
       method: 'GET',
