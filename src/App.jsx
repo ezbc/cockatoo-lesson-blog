@@ -16,10 +16,16 @@ function App() {
 
   return (
     <div style={isDarkMode ? darkModeStyle : lightModeStyle}>
-      <ToggleAsAFunction onSwitch={setIsDarkMode} initialValue={false}>
+      {/*<ToggleAsAFunction onSwitch={setIsDarkMode} initialValue={false}>*/}
+      {/*  {' '}*/}
+      {/*  {isDarkMode ? 'Light mode' : 'Dark Mode'}*/}
+      {/*</ToggleAsAFunction>*/}
+
+      <ToggleAsAClass onSwitch={setIsDarkMode} initialValue={false}>
         {' '}
         {isDarkMode ? 'Light mode' : 'Dark Mode'}
-      </ToggleAsAFunction>
+      </ToggleAsAClass>
+
       <BrowserRouter>
         <Routes>
           <Route
