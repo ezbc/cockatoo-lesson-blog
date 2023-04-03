@@ -1,0 +1,26 @@
+.dark-theme {
+    --color: white;
+    --background-color: black;
+    --link-color: pink;
+}
+
+.light-theme {
+    --color: black;
+    --background-color: white;
+    --link-color: blue;
+}
+
+
+* {
+    color: var(--color);
+    background-color: var(--background-color);
+}
+
+
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    color: var(--link-color);
+}

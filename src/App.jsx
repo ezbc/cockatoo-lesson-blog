@@ -6,17 +6,16 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import paths from './paths.js';
 import Toggle from './Toggle.jsx';
 import NavigationBar from './NavigationBar.jsx';
-
-const darkModeStyle = { background: 'black', color: 'white' };
-const lightModeStyle = { background: 'white', color: 'black' };
+import styles from './App.css';
 
 function App() {
   const [state, runAction] = useReducer(stateManagementFunction, initialState);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
-    <div style={isDarkMode ? darkModeStyle : lightModeStyle}>
+    <div className={isDarkMode ? 'dark-theme' : 'light-theme'}>
       <NavigationBar />
+
       <Toggle onSwitch={setIsDarkMode} initialValue={false}>
         {' '}
         {isDarkMode ? 'Light mode' : 'Dark Mode'}
