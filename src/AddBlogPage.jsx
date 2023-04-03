@@ -26,7 +26,6 @@ const AddBlogPage = ({ state, runAction, refreshRecords }) => {
         focus={state.focus === 'addBlog'}
         onAddTitle={onAddBlogTitle}
       />
-      <a href={paths.HOME}>Home</a>
     </>
   );
 };

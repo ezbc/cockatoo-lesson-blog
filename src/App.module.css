@@ -1,0 +1,15 @@
+.dark-theme {
+
+    color: white;
+    background-color: black;
+
+}
+
+
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    color: blue;
+}
