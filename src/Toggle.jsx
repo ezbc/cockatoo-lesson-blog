@@ -1,11 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const ToggleAsAFunction = ({ onSwitch, initialValue, children }) => {
+const Toggle = ({ onSwitch, initialValue, children }) => {
   const [toggle, setToggle] = useState(initialValue);
-
-  useEffect(() => {
-    console.log('toggle mounted');
-  }, []);
 
   const switchToggle = () => {
     const newToggle = !toggle;
@@ -16,4 +12,4 @@ const ToggleAsAFunction = ({ onSwitch, initialValue, children }) => {
   return <button onClick={switchToggle}>{children}</button>;
 };
 
-export default ToggleAsAFunction;
+export default Toggle;

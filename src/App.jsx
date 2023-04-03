@@ -4,8 +4,7 @@ import AddBlogPage from './AddBlogPage.jsx';
 import { initialState, stateManagementFunction } from './blogState.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import paths from './paths.js';
-import ToggleAsAFunction from './ToggleAsAFunction.jsx';
-import ToggleAsAClass from './ToggleAsAClass.jsx';
+import Toggle from './Toggle.jsx';
 
 const darkModeStyle = { background: 'black', color: 'white' };
 const lightModeStyle = { background: 'white', color: 'black' };
@@ -16,16 +15,10 @@ function App() {
 
   return (
     <div style={isDarkMode ? darkModeStyle : lightModeStyle}>
-      {/*<ToggleAsAFunction onSwitch={setIsDarkMode} initialValue={false}>*/}
-      {/*  {' '}*/}
-      {/*  {isDarkMode ? 'Light mode' : 'Dark Mode'}*/}
-      {/*</ToggleAsAFunction>*/}
-
-      <ToggleAsAClass onSwitch={setIsDarkMode} initialValue={false}>
+      <Toggle onSwitch={setIsDarkMode} initialValue={false}>
         {' '}
         {isDarkMode ? 'Light mode' : 'Dark Mode'}
-      </ToggleAsAClass>
-
+      </Toggle>
       <BrowserRouter>
         <Routes>
           <Route
@@ -38,7 +31,6 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
-      {/*<h1>Cockatoo Lesson Blog Title</h1>*/}
     </div>
   );
 }
