@@ -20,7 +20,12 @@ const Search = ({ onSearch, focus, className }) => {
 
   // When is passing JSX in prop appropriate
   return (
-    <form className={className}>
+    <form
+      className={className}
+      onSubmit={e => {
+        e.preventDefault();
+      }}
+    >
       <InputAndLabel
         title={'Search'}
         placeholder={'Search for blogs'}
