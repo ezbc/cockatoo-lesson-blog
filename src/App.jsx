@@ -1,15 +1,25 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import HomePage from './HomePage.jsx';
 import AddBlogPage from './AddBlogPage.jsx';
 import { initialState, stateManagementFunction } from './blogState.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import paths from './paths.js';
+import Toggle from './Toggle.jsx';
+import NavigationBar from './NavigationBar.jsx';
+import styles from './App.css';
 
 function App() {
   const [state, runAction] = useReducer(stateManagementFunction, initialState);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
-    <div>
+    <div className={isDarkMode ? 'dark-theme' : 'light-theme'}>
+      <NavigationBar />
+
+      <Toggle onSwitch={setIsDarkMode} initialValue={false}>
+        {' '}
+        {isDarkMode ? 'Light mode' : 'Dark Mode'}
+      </Toggle>
       <BrowserRouter>
         <Routes>
           <Route
@@ -22,7 +32,6 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
-      {/*<h1>Cockatoo Lesson Blog Title</h1>*/}
     </div>
   );
 }
