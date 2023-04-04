@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import Button from './Button.jsx';
+import styled from 'styled-components';
 
-const Toggle = ({ onSwitch, initialValue, children }) => {
+const Toggle = ({ onSwitch, initialValue, children, className }) => {
   const [toggle, setToggle] = useState(initialValue);
 
   const switchToggle = () => {
@@ -9,7 +11,13 @@ const Toggle = ({ onSwitch, initialValue, children }) => {
     onSwitch(newToggle);
   };
 
-  return <button onClick={switchToggle}>{children}</button>;
+  return (
+    <Button className={className} onClick={switchToggle}>
+      {children}
+    </Button>
+  );
 };
 
-export default Toggle;
+export default styled(Toggle)`
+  color: red;
+`;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import InputAndLabel from './InputAndLabel.jsx';
+import styled from 'styled-components';
 
-export default function Search({ onSearch, focus }) {
+const Search = ({ onSearch, focus, className }) => {
   const [timer, setTimer] = useState(null);
 
   function onChange(event) {
@@ -19,7 +20,7 @@ export default function Search({ onSearch, focus }) {
 
   // When is passing JSX in prop appropriate
   return (
-    <form>
+    <form className={className}>
       <InputAndLabel
         title={'Search'}
         placeholder={'Search for blogs'}
@@ -33,4 +34,6 @@ export default function Search({ onSearch, focus }) {
       </InputAndLabel>
     </form>
   );
-}
+};
+
+export default styled(Search)``;

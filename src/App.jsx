@@ -6,20 +6,21 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import paths from './paths.js';
 import Toggle from './Toggle.jsx';
 import NavigationBar from './NavigationBar.jsx';
-import styles from './App.css';
+import './App.css';
 
 function App() {
   const [state, runAction] = useReducer(stateManagementFunction, initialState);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
-    <div className={isDarkMode ? 'dark-theme' : 'light-theme'}>
-      <NavigationBar />
-
-      <Toggle onSwitch={setIsDarkMode} initialValue={false}>
-        {' '}
-        {isDarkMode ? 'Light mode' : 'Dark Mode'}
-      </Toggle>
+    <div className={`app ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
+      <div className={'header'}>
+        <NavigationBar />
+        <Toggle onSwitch={setIsDarkMode} initialValue={false}>
+          {' '}
+          {isDarkMode ? 'Light mode' : 'Dark Mode'}
+        </Toggle>
+      </div>
       <BrowserRouter>
         <Routes>
           <Route

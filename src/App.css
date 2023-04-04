@@ -1,26 +1,44 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+
+}
+
+
 .dark-theme {
     --color: white;
     --background-color: black;
-    --link-color: pink;
+    --link-color: hsl(300, 100%, 80%);
 }
-
 .light-theme {
     --color: black;
     --background-color: white;
-    --link-color: blue;
+    --link-color: hsl(300, 100%, 20%);
 }
 
-
-* {
+.app {
     color: var(--color);
     background-color: var(--background-color);
+    padding: 12px;
+}
+
+.app > *:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.app button {
+    color: var(--color);
+    background-color: var(--background-color);
+    border: solid 2px var(--color);
+    border-radius: 4px;
 }
 
 
-a {
-    text-decoration: none;
-}
-
-a:link, a:visited {
-    color: var(--link-color);
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
 }

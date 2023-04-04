@@ -1,12 +1,31 @@
-export default function BlogTitles({ titles, onRemove }) {
+import Button from './Button.jsx';
+import styled from 'styled-components';
+
+function BlogTitles({ titles, onRemove, className }) {
   return (
-    <ul>
+    <ul className={className}>
       {titles.map(blog => (
-        <span key={blog.id}>
-          <li>{blog.title}</li>
-          <button onClick={() => onRemove && onRemove(blog)}>X</button>
-        </span>
+        <li key={blog.id}>
+          <span>&#x2022;</span>
+          <p>{blog.title}</p>
+          <Button onClick={() => onRemove && onRemove(blog)}>X</Button>
+        </li>
       ))}
     </ul>
   );
 }
+
+export default styled(BlogTitles)`
+  li {
+    display: flex;
+    align-items: center;
+
+    > *:not(:last-child) {
+      margin-right: 8px;
+    }
+
+    ${Button} {
+      height: fit-content;
+    }
+  }
+`;
