@@ -1,14 +1,25 @@
 import paths from './paths.js';
-import styles from './NavigationBar.css';
+import styled from 'styled-components';
 
-const NavigationBar = () => {
+const NavigationBar = ({ className }) => {
   return (
-    <div className={'navigation-bar'}>
+    <div className={className}>
       <a href={paths.HOME}>Home</a>
-      <span> </span>
       <a href={paths.NEW_BLOG}>Add Blog</a>
     </div>
   );
 };
 
-export default NavigationBar;
+export default styled(NavigationBar)`
+  *:not(:last-child) {
+    margin-right: 8px;
+  }
+  > * {
+    border: solid 1px var(--color);
+    padding: 4px;
+  }
+
+  a {
+    color: var(--link-color);
+  }
+`;
