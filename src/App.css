@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 a {
     text-decoration: none;
 
@@ -13,6 +14,7 @@ a {
     --background-color: black;
     --link-color: hsl(300, 100%, 80%);
 }
+
 .light-theme {
     --color: black;
     --background-color: white;
@@ -36,9 +38,3 @@ a {
     border-radius: 4px;
 }
 
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-}
