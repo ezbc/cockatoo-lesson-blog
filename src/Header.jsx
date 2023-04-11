@@ -3,7 +3,7 @@ import NavigationBar from './NavigationBar.jsx';
 import Toggle from './Toggle.jsx';
 import UserProfile from './UserProfile';
 
-const Header = ({ className, isDarkMode, setIsDarkMode, username }) => {
+const Header = ({ className, isDarkMode, setIsDarkMode }) => {
   return (
     <div className={className}>
       <NavigationBar />
@@ -12,7 +12,7 @@ const Header = ({ className, isDarkMode, setIsDarkMode, username }) => {
           {' '}
           {isDarkMode ? 'Light mode' : 'Dark Mode'}
         </Toggle>
-        <UserProfile username={username} />
+        <UserProfile />
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import InputAndLabel from './InputAndLabel.jsx';
 import styled from 'styled-components';
+import UserProfile from './UserProfile.jsx';
 
 const Search = ({ onSearch, focus, className }) => {
   const [timer, setTimer] = useState(null);
