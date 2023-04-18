@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import NavigationBar from './NavigationBar.jsx';
-import Toggle from './Toggle.jsx';
-import UserProfile from './UserProfile';
+import NavigationBar from '@root/features/NavigationBar';
+import Toggle from '@ui/Toggle';
+import UserProfile from '@features/UserProfile';
 
 const Header = ({ className, isDarkMode, setIsDarkMode }) => {
   return (

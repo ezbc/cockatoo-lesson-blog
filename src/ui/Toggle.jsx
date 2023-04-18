@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Button from './Button.jsx';
+import Button from '@root/ui/Button.jsx';
 import styled from 'styled-components';
 
 const Toggle = ({ onSwitch, initialValue, children, className }) => {

@@ -1,4 +1,4 @@
-import paths from './paths.js';
+import paths from '@root/paths';
 import styled from 'styled-components';
 
 const NavigationBar = ({ className }) => {

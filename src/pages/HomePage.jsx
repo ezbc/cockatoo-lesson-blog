@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { deleteRecord, listRecords } from './airtableApi.jsx';
-import Search from './Search.jsx';
-import BlogTitles from './BlogTitles.jsx';
+import { deleteRecord, listRecords } from '@root/api/airtableApi';
+import Search from '@features/Search.jsx';
+import BlogTitles from '@features/BlogTitles';
 
 const HomePage = ({ state, runAction }) => {
   const refreshRecords = () => {
