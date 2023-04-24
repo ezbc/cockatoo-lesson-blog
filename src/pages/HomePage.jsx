@@ -1,8 +1,13 @@
 import { useEffect } from 'react';
-import { deleteRecord, listRecords } from '@root/api/airtableApi';
+import {
+  deleteRecord,
+  listRecords,
+  updateRecords,
+} from '@root/api/airtableApi';
 import Search from '@features/Search.jsx';
 import BlogTitles from '@features/BlogTitles';
 import { useAppContext } from '@root/App.jsx';
+import { reorderObjectInIndexedArray } from '@root/ordering.jsx';
 
 const HomePage = () => {
   const { state, runAction } = useAppContext();
@@ -31,6 +36,19 @@ const HomePage = () => {
     refreshRecords();
   };
 
+  const onMoveDown = (currentIndex, newIndex) => {
+    const reorderedBlogTitles = reorderObjectInIndexedArray(
+      currentIndex,
+      newIndex,
+      state.blogTitles
+    );
+    runAction({
+      type: 'SET_BLOG_TITLES',
+      payload: { blogTitles: reorderedBlogTitles },
+    });
+    updateRecords(reorderedBlogTitles);
+  };
+
   useEffect(() => {
     !!state.focus && runAction({ type: 'RESET_FOCUS' });
   }, [state.focus]);
@@ -41,7 +59,7 @@ const HomePage = () => {
       {state.isLoading ? (
         <p>Loading...</p>
       ) : (
-        <BlogTitles titles={state.blogTitles} onRemove={onRemove} />
+        <BlogTitles onRemove={onRemove} onMoveDown={onMoveDown} />
       )}
       {state.isAdding && <p>Adding...</p>}
     </div>

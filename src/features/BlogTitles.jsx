@@ -1,13 +1,21 @@
 import Button from '@ui/Button';
 import styled from 'styled-components';
+import { useAppContext } from '@root/App.jsx';
 
-function BlogTitles({ titles, onRemove, className }) {
+function BlogTitles({ onMoveDown, onRemove, className }) {
+  const { state } = useAppContext();
   return (
     <ul className={className}>
-      {titles.map(blog => (
+      {state.blogTitles.map(blog => (
         <li key={blog.id}>
           <span>&#x2022;</span>
           <p>{blog.title}</p>
+          <button onClick={() => onMoveDown(blog.index, blog.index + 1)}>
+            Move Down
+          </button>
+          <button onClick={() => onMoveDown(blog.index, blog.index - 1)}>
+            Move Up
+          </button>
           <Button onClick={() => onRemove && onRemove(blog)}>X</Button>
         </li>
       ))}
