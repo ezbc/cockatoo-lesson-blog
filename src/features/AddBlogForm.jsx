@@ -1,4 +1,4 @@
-import InputAndLabel from './InputAndLabel';
+import InputAndLabel from '@root/forms/InputAndLabel.jsx';
 
 export default function AddBlogForm({ onAddTitle, focus }) {
   function onSubmit(event) {

@@ -1,4 +1,4 @@
-import Button from './Button.jsx';
+import Button from '@ui/Button';
 import styled from 'styled-components';
 
 function BlogTitles({ titles, onRemove, className }) {

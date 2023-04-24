@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import AppInContext from './AppInContext.jsx';
+import AppInContext from '@root/AppInContext.jsx';
 const AppContext = createContext();
 
 function App() {

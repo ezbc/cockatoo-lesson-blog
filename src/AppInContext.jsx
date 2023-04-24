@@ -1,11 +1,11 @@
 import { useReducer, useState } from 'react';
-import HomePage from './HomePage.jsx';
-import AddBlogPage from './AddBlogPage.jsx';
-import { initialState, stateManagementFunction } from './blogState.js';
+import HomePage from '@root/pages/HomePage.jsx';
+import AddBlogPage from '@root/pages/AddBlogPage';
+import { initialState, stateManagementFunction } from '@root/blogState.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import paths from './paths.js';
-import './App.css';
-import Header from './Header';
+import paths from '@root/paths.js';
+import '@root/App.css';
+import Header from '@features/Header.jsx';
 
 function App() {
   const [state, runAction] = useReducer(stateManagementFunction, initialState);

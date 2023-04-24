@@ -2,7 +2,7 @@ import {
   AIRTABLE_TABLE_NAME,
   AIRTABLE_BASE_ID,
   AIRTABLE_API_KEY,
-} from './configuration.jsx';
+} from '@root/configuration';
 
 const tableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
 

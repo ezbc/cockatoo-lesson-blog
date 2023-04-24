@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useContext } from 'react';
-import { ReactComponent as UserIcon } from './user-avatar.svg';
-import { AppContext } from './App.jsx';
+import { ReactComponent as UserIcon } from '@root/icons/user-avatar.svg';
+import { AppContext } from '@root/App';
 
 const UserProfile = ({ className }) => {
   const appContext = useContext(AppContext);
