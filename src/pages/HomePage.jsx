@@ -36,17 +36,30 @@ const HomePage = () => {
     refreshRecords();
   };
 
-  const onMoveDown = (currentIndex, newIndex) => {
+  const onMove = (currentIndex, newIndex) => {
     const reorderedBlogTitles = reorderObjectInIndexedArray(
       currentIndex,
       newIndex,
       state.blogTitles
     );
+
+    // this is an optimistic update, we immediately update the browser state expecting that airtable
+    // will finish updating its records in the background. there's a possibility the airtable update
+    // may fail though.
     runAction({
       type: 'SET_BLOG_TITLES',
       payload: { blogTitles: reorderedBlogTitles },
     });
     updateRecords(reorderedBlogTitles);
+
+    // if we wanted to run a pessimistic update we would only update the blog state
+    // after the reords were updated in airtable:
+    // updateRecords(reorderedBlogTitles).then(updatedBlogTitles => {
+    //   runAction({
+    //     type: 'SET_BLOG_TITLES',
+    //     payload: { blogTitles: updatedBlogTitles },
+    //   });
+    // });
   };
 
   useEffect(() => {
@@ -59,7 +72,7 @@ const HomePage = () => {
       {state.isLoading ? (
         <p>Loading...</p>
       ) : (
-        <BlogTitles onRemove={onRemove} onMoveDown={onMoveDown} />
+        <BlogTitles onRemove={onRemove} onMove={onMove} />
       )}
       {state.isAdding && <p>Adding...</p>}
     </div>
