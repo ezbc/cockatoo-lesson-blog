@@ -3,6 +3,10 @@ export const reorderObjectInIndexedArray = (
   newIndex,
   indexedArray
 ) => {
+  // indexedArray  =  [{index: 1, title: 'Lesson 1.10'}, {index: 0, 'Lesson 1.11'}, ...]
+  // reorderObjectInIndexedArray(1, 0, indexedArray)
+  //  -> [{index: 0, title: 'Lesson 1.10'}, {index: 1, 'Lesson 1.11'}, ...]
+
   // avoid mutating the array
   const indexedArrayCopy = [...indexedArray];
 
@@ -21,22 +25,3 @@ export const reorderObjectInIndexedArray = (
 
   return reorderedArray;
 };
-
-// // expects an array of objects containing an "index" property
-// export const insertNewObjectInIndexedArray = (newObj, indexedArray) => {
-//   // dont mutate arguments
-//   const indexedArrayCopy = [...indexedArray];
-//
-//   // find index to insert new object
-//   let insertIndex = indexedArrayCopy.findIndex(obj => obj.index > newObj.index);
-//
-//   // insert new object at determined index
-//   indexedArrayCopy.splice(insertIndex, 0, newObj);
-//
-//   // update order property of all objects that come after inserted object
-//   for (let i = insertIndex + 1; i < indexedArrayCopy.length; i++) {
-//     indexedArrayCopy[i].index++;
-//   }
-//
-//   return;
-// };
