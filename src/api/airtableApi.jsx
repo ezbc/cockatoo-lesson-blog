@@ -111,7 +111,7 @@ export const updateRecords = async titles => {
         ...defaultHeaders,
         'Content-Type': 'application/json',
       },
-      method: 'PUT',
+      method: 'PATCH',
     });
 
     return handleResponse(response);
