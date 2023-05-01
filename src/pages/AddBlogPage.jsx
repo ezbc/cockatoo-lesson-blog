@@ -2,8 +2,10 @@ import AddBlogForm from '@root/features/AddBlogForm.jsx';
 import { create } from '@root/api/airtableApi';
 import paths from '@root/paths';
 import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '@root/App.jsx';
 
-const AddBlogPage = ({ state, runAction, refreshRecords }) => {
+const AddBlogPage = () => {
+  const { state, runAction } = useAppContext();
   const navigate = useNavigate();
 
   const onAddBlogTitle = async newTitle => {

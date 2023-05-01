@@ -2,8 +2,11 @@ import { useEffect } from 'react';
 import { deleteRecord, listRecords } from '@root/api/airtableApi';
 import Search from '@features/Search.jsx';
 import BlogTitles from '@features/BlogTitles';
+import { useAppContext } from '@root/App.jsx';
 
-const HomePage = ({ state, runAction }) => {
+const HomePage = () => {
+  const { state, runAction } = useAppContext();
+
   const refreshRecords = () => {
     runAction({
       type: 'START_LOADING_BLOG_TITLES',
