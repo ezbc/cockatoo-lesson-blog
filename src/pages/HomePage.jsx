@@ -1,8 +1,13 @@
 import { useEffect } from 'react';
-import { deleteRecord, listRecords } from '@root/api/airtableApi';
+import {
+  deleteRecord,
+  listRecords,
+  updateRecords,
+} from '@root/api/airtableApi';
 import Search from '@features/Search.jsx';
 import BlogTitles from '@features/BlogTitles';
 import { useAppContext } from '@root/App.jsx';
+import { reorderObjectInIndexedArray } from '@root/ordering.jsx';
 
 const HomePage = () => {
   const { state, runAction } = useAppContext();
@@ -31,6 +36,32 @@ const HomePage = () => {
     refreshRecords();
   };
 
+  const onMove = (currentIndex, newIndex) => {
+    const reorderedBlogTitles = reorderObjectInIndexedArray(
+      currentIndex,
+      newIndex,
+      state.blogTitles
+    );
+
+    // this is an optimistic update, we immediately update the browser state expecting that airtable
+    // will finish updating its records in the background. there's a possibility the airtable update
+    // may fail though.
+    runAction({
+      type: 'SET_BLOG_TITLES',
+      payload: { blogTitles: reorderedBlogTitles },
+    });
+    updateRecords(reorderedBlogTitles);
+
+    // if we wanted to run a pessimistic update we would only update the blog state
+    // after the reords were updated in airtable:
+    // updateRecords(reorderedBlogTitles).then(updatedBlogTitles => {
+    //   runAction({
+    //     type: 'SET_BLOG_TITLES',
+    //     payload: { blogTitles: updatedBlogTitles },
+    //   });
+    // });
+  };
+
   useEffect(() => {
     !!state.focus && runAction({ type: 'RESET_FOCUS' });
   }, [state.focus]);
@@ -41,7 +72,7 @@ const HomePage = () => {
       {state.isLoading ? (
         <p>Loading...</p>
       ) : (
-        <BlogTitles titles={state.blogTitles} onRemove={onRemove} />
+        <BlogTitles onRemove={onRemove} onMove={onMove} />
       )}
       {state.isAdding && <p>Adding...</p>}
     </div>

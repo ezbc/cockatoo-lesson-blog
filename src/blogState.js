@@ -1,3 +1,5 @@
+import { reorderObjectInIndexedArray } from '@root/ordering.jsx';
+
 export const stateManagementFunction = (previousState, action) => {
   switch (action.type) {
     case 'START_LOADING_BLOG_TITLES':
@@ -9,6 +11,11 @@ export const stateManagementFunction = (previousState, action) => {
       return {
         ...previousState,
         isLoading: false,
+        blogTitles: action.payload.blogTitles,
+      };
+    case 'SET_BLOG_TITLES':
+      return {
+        ...previousState,
         blogTitles: action.payload.blogTitles,
       };
     case 'SET_SEARCH_TEXT':

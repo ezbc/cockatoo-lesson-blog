@@ -19,8 +19,8 @@ const handleResponse = async response => {
 
   if (data.records) {
     const records = data.records.map(record => ({
-      title: record.fields.title,
       id: record.id,
+      ...record.fields,
     }));
 
     return records;
@@ -42,8 +42,8 @@ export const listRecords = async options => {
     // sort by title
     params = {
       ...params,
-      'sort[0][field]': 'title',
-      'sort[0][direction]': 'desc',
+      'sort[0][field]': 'index',
+      'sort[0][direction]': 'asc',
     };
 
     const response = await fetch(tableUrl + '?' + new URLSearchParams(params), {
@@ -87,6 +87,31 @@ export const create = async newRecord => {
         'Content-Type': 'application/json',
       },
       method: 'POST',
+    });
+
+    return handleResponse(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateRecords = async titles => {
+  try {
+    const response = await fetch(tableUrl, {
+      body: JSON.stringify({
+        records: titles.map(title => {
+          const { id: _, ...titleWithoutId } = title;
+          return {
+            id: title.id,
+            fields: titleWithoutId,
+          };
+        }),
+      }),
+      headers: {
+        ...defaultHeaders,
+        'Content-Type': 'application/json',
+      },
+      method: 'PATCH',
     });
 
     return handleResponse(response);
